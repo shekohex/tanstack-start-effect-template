@@ -51,7 +51,7 @@ Public contracts flow through `domain` and `protocol`; apps do not import implem
 3. Install dependencies and initialize project identity:
 
 ```bash
-pnpm install
+vp install
 pnpm template:init --name my-app --scope @my-org --env-prefix MY_APP
 ```
 
@@ -72,7 +72,7 @@ pnpm exec vp run dev
 | OpenAPI document | <http://localhost:4100/openapi.json> |
 | Storybook        | <http://localhost:6006>              |
 
-Requirements: Node.js 24+, pnpm 11+, Docker with Compose.
+Requirements: Node.js 24+, pnpm 11+, Docker with Compose, and [Vite+](https://viteplus.dev/guide/).
 
 ## Workspace
 

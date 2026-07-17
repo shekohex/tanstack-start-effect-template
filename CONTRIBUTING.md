@@ -3,7 +3,7 @@
 Contributions remain licensed under `AGPL-3.0-only`; contributors retain copyright.
 
 ```bash
-pnpm install
+vp install
 pnpm exec vp run setup
 pnpm exec vp run dev
 ```
