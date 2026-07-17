@@ -5,8 +5,9 @@
   "license": "AGPL-3.0-only",
   "type": "module",
   "scripts": {
+    "ci:local": "node scripts/run-local-ci.mjs",
     "prepare": "node scripts/install-hooks.mjs",
-    "signoff": "pnpm exec vp run ci && gh signoff ci",
+    "signoff": "pnpm ci:local && gh signoff ci",
     "signoff:setup": "node scripts/setup-gh-signoff.mjs",
     "template:init": "node scripts/template-init.mjs"
   },

@@ -67,7 +67,7 @@ pnpm exec vp run e2e:test
 pnpm exec vp run visual:test
 pnpm exec vp run build
 pnpm exec vp run db:test
-pnpm exec vp run ci
+pnpm ci:local
 ```
 
 ## Local Signoff
@@ -86,7 +86,7 @@ For each clean, pushed commit:
 pnpm signoff
 ```
 
-This runs the complete local Vite+ CI graph, then posts the `signoff/ci` commit status.
+This runs the complete local Vite+ CI graph against isolated PostgreSQL port `55432`, then posts the `signoff/ci` commit status.
 
 See `docs/architecture.md`, `docs/customization.md`, `docs/authentication.md`, `docs/migrations.md`, and `docs/ai-agents.md`.
 

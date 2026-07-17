@@ -14,6 +14,6 @@ Before opening a change:
 pnpm signoff
 ```
 
-`pnpm signoff` requires authenticated GitHub CLI, installed `basecamp/gh-signoff`, a clean worktree, and a pushed branch. Use `pnpm exec vp run ci` when validating before the first push.
+`pnpm signoff` requires authenticated GitHub CLI, installed `basecamp/gh-signoff`, a clean worktree, and a pushed branch. Use `pnpm ci:local` when validating before the first push.
 
 Protocol changes must remain language-neutral and include compatibility tests. Database changes use ordered, forward-only SQL migrations.
