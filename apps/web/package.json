@@ -20,7 +20,7 @@
     "@app/ui": "workspace:*",
     "@app/ui-tokens": "workspace:*",
     "@effect/atom-react": "catalog:effect-v4",
-    "@tailwindcss/vite": "4.3.2",
+    "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-devtools": "0.10.8",
     "@tanstack/react-router": "1.170.18",
     "@tanstack/react-router-devtools": "1.167.0",
