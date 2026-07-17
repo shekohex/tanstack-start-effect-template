@@ -1,49 +1,124 @@
+<div align="center">
+
 # Effect App Template
 
-Opinionated full-stack TypeScript template using Vite+, Effect, TanStack Start, Better Auth, PostgreSQL, and shared shadcn/Base UI components.
+Production-leaning full-stack TypeScript starter built with Effect, TanStack Start, Vite+, Better Auth, PostgreSQL, and shared shadcn/Base UI components.
 
-## Requirements
+[![CI](https://github.com/shekohex/tanstack-start-effect-template/actions/workflows/ci.yml/badge.svg)](https://github.com/shekohex/tanstack-start-effect-template/actions/workflows/ci.yml)
+[![Effect](https://img.shields.io/badge/Effect-v4_beta-6b5ce7)](https://effect.website)
+[![License](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
 
-- Node.js 24+
-- pnpm 11+
-- Docker with Compose
+[![Use this template](https://img.shields.io/badge/Use_this_template-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/new?template_name=tanstack-start-effect-template&template_owner=shekohex)
 
-## Initialize
+</div>
 
-Run once after creating a repository from this template:
+## Why This Template
 
-```bash
-pnpm template:init --name my-app --scope @my-org --env-prefix MY_APP
+Most starters stop at rendering a page. This template includes one working organization-membership vertical slice across schema, authorization, RPC/HTTP, database, authentication, client state, UI, migrations, and tests. Replace that domain while keeping proven boundaries and tooling.
+
+| Area          | Included                                                                    |
+| ------------- | --------------------------------------------------------------------------- |
+| Runtime       | Effect v4, typed services, layers, errors, configuration, and observability |
+| Web           | TanStack Start, React 19, Effect Atom, Tailwind CSS 4                       |
+| API           | Effect RPC, HttpApi, OpenAPI, PostgreSQL, forward-only SQL migrations       |
+| Identity      | Better Auth, session restoration, registration, login, logout               |
+| Authorization | Pure deny-by-default organization membership decisions                      |
+| UI            | Shared shadcn/Base UI primitives, semantic tokens, dark mode, Storybook     |
+| Quality       | Vite+ checks, unit/integration/E2E/a11y/visual tests, Lefthook              |
+| Agent support | Layered `AGENTS.md`, Effect/shadcn skills, vendored Effect source           |
+
+## Architecture
+
+```mermaid
+flowchart LR
+  Web[apps/web] --> Client[packages/client]
+  Client --> Protocol[packages/protocol]
+  Protocol --> API[apps/api]
+  Protocol --> Domain[packages/domain]
+  API --> Auth[packages/auth]
+  API --> Permissions[packages/permissions]
+  API --> DB[(PostgreSQL)]
+  Web --> UI[packages/ui]
+  UI --> Tokens[packages/ui-tokens]
 ```
 
-This updates package scope, environment prefix, service/database/cookie defaults, CLI binary, web metadata, Compose identifiers, and visible application name. It records completion in `.template-initialized.json`.
+Public contracts flow through `domain` and `protocol`; apps do not import implementation internals from other apps. See [`docs/architecture.md`](docs/architecture.md).
 
-## Start
+## Create A Project
+
+1. Click **Use this template** above and create a repository.
+2. Clone the generated repository.
+3. Install dependencies and initialize project identity:
 
 ```bash
 pnpm install
+pnpm template:init --name my-app --scope @my-org --env-prefix MY_APP
+```
+
+Initializer updates package names, environment variables, service/database/cookie defaults, CLI binary, Compose identifiers, web metadata, and visible application name. It validates inputs before editing and refuses repeated initialization.
+
+4. Start local infrastructure and applications:
+
+```bash
 cp .env.example .env
 pnpm exec vp run setup
 pnpm exec vp run dev
 ```
 
-Web: `http://localhost:3000`
+| Service          | URL                                  |
+| ---------------- | ------------------------------------ |
+| Web application  | <http://localhost:3000>              |
+| API              | <http://localhost:4100>              |
+| OpenAPI document | <http://localhost:4100/openapi.json> |
+| Storybook        | <http://localhost:6006>              |
 
-API OpenAPI document: `http://localhost:4100/openapi.json`
+Requirements: Node.js 24+, pnpm 11+, Docker with Compose.
 
-## Storybook
+## Workspace
 
-```bash
-pnpm exec vp run @app/ui#storybook
+```text
+apps/
+  api/              Effect runtime, services, handlers, migrations
+  web/              TanStack Start application and Effect Atom state
+  cli/              Public-client extension point
+packages/
+  auth/             Better Auth and Effect SQL adapter
+  client/           Protocol-derived application client
+  config/           Validated runtime configuration
+  domain/           JSON-compatible domain schemas and invariants
+  observability/    Optional telemetry layers
+  permissions/      Pure authorization decisions
+  protocol/         RPC, HTTP, OpenAPI, and wire contracts
+  testkit/          Deterministic test helpers
+  ui/               Shared primitives and composites
+  ui-tokens/        Semantic design tokens
+deploy/
+  compose/          Local PostgreSQL
+  migrations/       Ordered forward-only SQL migrations
 ```
 
-Storybook: `http://localhost:6006`
+## Commands
 
-## Effect development
+| Command                              | Purpose                                               |
+| ------------------------------------ | ----------------------------------------------------- |
+| `pnpm exec vp run dev`               | Start API and web development servers                 |
+| `pnpm exec vp run setup`             | Start PostgreSQL and apply migrations                 |
+| `pnpm exec vp run dev:services:down` | Stop local PostgreSQL                                 |
+| `pnpm exec vp run @app/ui#storybook` | Start component workshop                              |
+| `pnpm exec vp check`                 | Format, lint, and type-check                          |
+| `pnpm exec vp test --run`            | Run unit and Storybook interaction/a11y tests         |
+| `pnpm exec vp run integration:test`  | Run PostgreSQL integration tests                      |
+| `pnpm exec vp run e2e:test`          | Run browser application flow                          |
+| `pnpm exec vp run visual:test`       | Compare Storybook visual baselines                    |
+| `pnpm exec vp run db:test`           | Verify migrations and database invariants             |
+| `pnpm exec vp run build`             | Build apps, packages, and Storybook                   |
+| `pnpm ci:local`                      | Run complete gate on isolated PostgreSQL port `55432` |
 
-Effect v4 is pinned to the latest selected beta across `effect` and all `@effect/*` packages. The upstream v4 source is vendored as a squashed Git subtree at `.repos/effect` so humans and coding agents can inspect current APIs, tests, and implementation patterns.
+## Effect Development
 
-Update the reference source with:
+All `effect` and `@effect/*` dependencies use one pnpm catalog entry in `pnpm-workspace.yaml`. The current upstream source is available at `.repos/effect` for API, implementation, and test research.
+
+Update the source snapshot with:
 
 ```bash
 git subtree pull \
@@ -51,47 +126,32 @@ git subtree pull \
   https://github.com/Effect-TS/effect.git \
   main \
   --squash
+git rm --ignore-unmatch .repos/effect/pnpm-lock.yaml
 ```
 
-Agents must load `.agents/skills/effect-ts/SKILL.md` and read `.repos/effect/LLMS.md` before writing Effect code.
-
-Every directory under `apps/` and `packages/` has a slim `README.md` and local `AGENTS.md`. Read the nearest guide before changing that workspace.
-
-## Validate
-
-```bash
-pnpm exec vp check
-pnpm exec vp test --run
-pnpm exec vp run integration:test
-pnpm exec vp run e2e:test
-pnpm exec vp run visual:test
-pnpm exec vp run build
-pnpm exec vp run db:test
-pnpm ci:local
-```
+The upstream lockfile is intentionally omitted so GitHub dependency scanning stays scoped to template dependencies. Agents must load `.agents/skills/effect-ts/SKILL.md`, read `.repos/effect/LLMS.md`, and follow the nearest workspace `AGENTS.md` before changing Effect code.
 
 ## Local Signoff
 
-After publishing the repository and authenticating GitHub CLI, run once:
+This repository supports [`basecamp/gh-signoff`](https://github.com/basecamp/gh-signoff) for local CI commit statuses.
 
 ```bash
+# Once, after publishing a generated repository
 pnpm signoff:setup
-```
 
-This installs `basecamp/gh-signoff` and requires `signoff/ci` on the default branch. Run before adding other branch-protection rules because upstream `gh signoff install` configures branch protection.
-
-For each clean, pushed commit:
-
-```bash
+# For each clean, pushed commit
 pnpm signoff
 ```
 
-This runs the complete local Vite+ CI graph against isolated PostgreSQL port `55432`, then posts the `signoff/ci` commit status.
+`pnpm signoff` runs the complete local gate, then publishes `signoff/ci`. Run setup before adding other branch-protection rules because `gh signoff install` configures branch protection.
 
-See `docs/architecture.md`, `docs/customization.md`, `docs/authentication.md`, `docs/migrations.md`, and `docs/ai-agents.md`.
+## Documentation
 
-## GitHub Template
+- [`docs/customization.md`](docs/customization.md): identity replacement and domain customization
+- [`docs/authentication.md`](docs/authentication.md): authentication boundaries and flows
+- [`docs/migrations.md`](docs/migrations.md): migration lifecycle and database invariants
+- [`docs/ai-agents.md`](docs/ai-agents.md): repository guidance for coding agents
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): contribution and validation workflow
+- [`SECURITY.md`](SECURITY.md): private vulnerability reporting
 
-After pushing to an approved remote, enable GitHub repository setting **Template repository**. Remote creation, pushes, and setting changes are intentionally not automated.
-
-License: `AGPL-3.0-only`.
+Licensed under [`AGPL-3.0-only`](LICENSE).
