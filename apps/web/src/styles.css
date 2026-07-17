@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+@import '@app/ui-tokens/styles.css';
+
+@source '../../../packages/ui/src/**/*.{ts,tsx}';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}

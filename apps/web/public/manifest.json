@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "short_name": "App",
+  "name": "App",
+  "description": "Full-stack Effect application",
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#101828",
+  "background_color": "#f8fafc"
+}

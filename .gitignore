@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.vite/
+.vite-task/
+.turbo/
+coverage/
+.pi/workflows/runs/
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+
+*storybook.log
+storybook-static
+playwright-report/
+test-results/
+
+# Local package-scoped agent tooling
+/packages/ui/.agents/
+
+# Template fixture output
+/.template-fixtures/

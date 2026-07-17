@@ -1,0 +1,38 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalogs:
+  effect-v4:
+    effect: 4.0.0-beta.99
+    '@effect/atom-react': 4.0.0-beta.99
+    '@effect/platform-browser': 4.0.0-beta.99
+    '@effect/platform-node': 4.0.0-beta.99
+    '@effect/sql-pg': 4.0.0-beta.99
+    '@effect/vitest': 4.0.0-beta.99
+
+allowBuilds:
+  argon2: true
+  esbuild: true
+  lefthook: true
+  lightningcss: true
+  msgpackr-extract: true
+  msw: false
+
+enableGlobalVirtualStore: true
+confirmModulesPurge: false
+
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@tanstack/*'
+  - 'effect'
+  - '@effect/*'
+  - 'vite-plus'
+
+packageExtensions:
+  '@effect/vitest@4.0.0-beta.99':
+    dependencies:
+      '@vitest/runner': 4.1.10
+  '@voidzero-dev/vite-plus-core@0.2.4':
+    dependencies:
+      vite-plus: 0.2.4

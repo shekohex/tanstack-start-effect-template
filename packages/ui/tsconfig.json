@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "outDir": "dist",
+    "paths": {
+      "@app/ui": ["./src/index.ts"],
+      "@app/ui/*": ["./src/*"]
+    },
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "references": [{ "path": "../ui-tokens" }]
+}

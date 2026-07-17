@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      exclude: '.repos/**'
+      glob: '*.{js,jsx,json,jsonc,md,ts,tsx,yaml,yml}'
+      run: pnpm exec vp fmt {staged_files}
+      stage_fixed: true
+    lint:
+      exclude: '.repos/**'
+      glob: '*.{js,jsx,ts,tsx}'
+      run: pnpm exec vp lint {staged_files}
+
+pre-push:
+  commands:
+    full-test-suite:
+      run: pnpm exec vp run ci

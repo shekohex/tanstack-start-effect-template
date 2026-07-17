@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../../packages/auth" },
+    { "path": "../../packages/config" },
+    { "path": "../../packages/domain" },
+    { "path": "../../packages/observability" },
+    { "path": "../../packages/permissions" },
+    { "path": "../../packages/protocol" }
+  ]
+}

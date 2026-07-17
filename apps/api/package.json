@@ -1,0 +1,31 @@
+{
+  "name": "@app/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "db:migrate": "tsx --conditions=development src/migrations.ts up",
+    "db:status": "tsx --conditions=development src/migrations.ts status",
+    "dev": "tsx watch --conditions=development src/main.ts",
+    "start": "node dist/main.js",
+    "test": "vitest run --passWithNoTests",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
+  },
+  "dependencies": {
+    "@app/auth": "workspace:*",
+    "@app/config": "workspace:*",
+    "@app/domain": "workspace:*",
+    "@app/observability": "workspace:*",
+    "@app/permissions": "workspace:*",
+    "@app/protocol": "workspace:*",
+    "@effect/platform-node": "catalog:effect-v4",
+    "@effect/sql-pg": "catalog:effect-v4",
+    "effect": "catalog:effect-v4"
+  },
+  "devDependencies": {
+    "@effect/vitest": "catalog:effect-v4",
+    "@types/node": "24.10.1",
+    "tsx": "4.23.1"
+  }
+}

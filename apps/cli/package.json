@@ -1,0 +1,22 @@
+{
+  "name": "@app/cli",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "app": "dist/main.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx --conditions=development src/main.ts",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@app/client": "workspace:*",
+    "@app/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.23.1"
+  }
+}

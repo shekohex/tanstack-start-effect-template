@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="App">
+  <rect width="512" height="512" rx="96" fill="#101828"/>
+  <path d="M140 112v288M140 140h154c52 0 86 30 86 76s-34 76-86 76H140" fill="none" stroke="#f8fafc" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m278 292 102 108" fill="none" stroke="#22d3ee" stroke-width="44" stroke-linecap="round"/>
+  <circle cx="140" cy="140" r="16" fill="#2563eb"/>
+  <circle cx="140" cy="292" r="16" fill="#2563eb"/>
+  <circle cx="140" cy="400" r="16" fill="#2563eb"/>
+</svg>

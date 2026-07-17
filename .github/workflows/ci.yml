@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+        with:
+          version: 11.13.0
+
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@8a7496fd44e8a1b0a88a7459e36213b2fefc1d15
+        with:
+          cache: true
+          node-version: 24.18.0
+          run-install: |
+            - cwd: .
+              args: ['--frozen-lockfile']
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter @app/ui exec playwright install --with-deps chromium
+
+      - name: Run complete quality gate
+        run: pnpm exec vp run ci
+
+      - name: Upload browser test artifacts
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-test-artifacts
+          path: |
+            apps/web/playwright-report
+            apps/web/test-results/e2e
+            packages/ui/playwright-report
+            packages/ui/test-results/visual
+          if-no-files-found: ignore
+          retention-days: 14

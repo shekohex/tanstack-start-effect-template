@@ -1,0 +1,23 @@
+{
+  "name": "@app/observability",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "effect": "catalog:effect-v4"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1"
+  }
+}

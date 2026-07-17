@@ -1,0 +1,27 @@
+{
+  "name": "effect-app-template",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "scripts": {
+    "prepare": "node scripts/install-hooks.mjs",
+    "signoff": "pnpm exec vp run ci && gh signoff ci",
+    "signoff:setup": "node scripts/setup-gh-signoff.mjs",
+    "template:init": "node scripts/template-init.mjs"
+  },
+  "devDependencies": {
+    "@effect/vitest": "catalog:effect-v4",
+    "@storybook/addon-vitest": "10.5.0",
+    "@types/node": "24.10.1",
+    "@vitest/browser-playwright": "4.1.10",
+    "lefthook": "2.1.10",
+    "typescript": "6.0.2",
+    "vite-plus": "0.2.4",
+    "vitest": "4.1.10"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@11.13.0"
+}

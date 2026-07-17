@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import '@app/ui-tokens/styles.css';
+
+@source '../src/**/*.{ts,tsx}';
