@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@effect/vitest": "catalog:effect-v4",
-    "@storybook/addon-vitest": "10.5.0",
+    "@storybook/addon-vitest": "10.6.2",
     "@types/node": "24.10.1",
     "@vitest/browser-playwright": "4.1.10",
     "lefthook": "2.1.10",
